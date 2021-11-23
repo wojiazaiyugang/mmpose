@@ -13,8 +13,7 @@ RUN apt-get update && apt-get install -y git ninja-build libglib2.0-0 libsm6 lib
     && rm -rf /var/lib/apt/lists/*
 
 # Install xtcocotools
-RUN pip install cython
-RUN pip install xtcocotools
+RUN pip install pqi && pqi use aliyun && pip install cython xtcocotools pudb
 
 # Install MMCV
 RUN pip install mmcv-full==latest+torch1.6.0+cu101 -f https://download.openmmlab.com/mmcv/dist/index.html
