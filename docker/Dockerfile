@@ -12,15 +12,10 @@ RUN apt-get update && apt-get install -y git ninja-build libglib2.0-0 libsm6 lib
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+ENV FORCE_CUDA="1"
 # Install xtcocotools
-RUN pip install pqi && pqi use aliyun && pip install cython xtcocotools pudb
+RUN pip install pqi && pqi use aliyun && pip install cython xtcocotools pudb numpy torch>=1.3
 
 # Install MMCV
 RUN pip install mmcv-full==latest+torch1.6.0+cu101 -f https://download.openmmlab.com/mmcv/dist/index.html
 
-# Install MMPose
-RUN conda clean --all
-WORKDIR /mmpose
-RUN mkdir -p /mmpose/data
-ENV FORCE_CUDA="1"
-RUN pip install -r requirements/build.txt
